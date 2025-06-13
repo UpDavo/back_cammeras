@@ -1,158 +1,98 @@
-# Django Generic Backend
+# Cammeras Backend
 
-Este es un **proyecto Django genérico** diseñado para servir como base para cualquier proyecto con prospecto de crecimiento. Incluye una configuración robusta para **autenticación (auth), APIs RESTful**, y una estructura modular escalable.
+Backend en Django + Django REST Framework para gestión de usuarios, roles y autenticación JWT. Incluye documentación automática de la API y estructura lista para crecer.
 
 ---
 
 ## Características principales
 
-- ✅ **Autenticación con JWT** (JSON Web Tokens) usando `djangorestframework-simplejwt`.
-- ✅ **Estructura modular y escalable** con separación de lógica en servicios, modelos y utilidades.
-- ✅ **Integración con MySQL** como base de datos.
-- ✅ **CORS habilitado** para permitir la conexión con aplicaciones frontend (React, Next.js, etc.).
-- ✅ **Configuración segura** mediante variables de entorno.
-- ✅ **Manejo de sesiones y permisos personalizados.**
-- ✅ **Documentación con DRF Browsable API.**
+- Autenticación JWT (SimpleJWT)
+- Gestión de usuarios y roles
+- Permisos personalizados
+- Documentación automática en `/docs/` (Swagger UI) y `/redoc/`
+- Estructura modular y escalable
+- Configuración por entorno (`.env`)
+- Compatible con MySQL y PostgreSQL
 
 ---
 
-## Requisitos previos
+## Instalación rápida
 
-Antes de instalar, asegúrate de tener instalados los siguientes requisitos:
-
-- [Python 3.8+](https://www.python.org/downloads/)
-- [MySQL](https://dev.mysql.com/downloads/)
-- [pip](https://pip.pypa.io/en/stable/)
-- [Virtualenv (opcional)](https://virtualenv.pypa.io/en/latest/)
-
----
-
-## Instalación
-
-### 1. Clonar el repositorio
-
-```bash
-git clone https://github.com/tu-usuario/tu-repositorio.git
-cd tu-repositorio
+1. Clona el repositorio y entra a la carpeta:
+   ```zsh
+git clone <tu-repo-url>
+cd back_cammeras
 ```
-
-### 2. Crear un entorno virtual
-
-```bash
+2. Crea y activa un entorno virtual:
+   ```zsh
 python -m venv env
-source env/bin/activate  # Para Linux/MacOS
-env\Scripts\activate     # Para Windows
+source env/bin/activate  # Mac/Linux
+# o
+.\env\Scripts\activate  # Windows
 ```
-
-### 3. Instalar dependencias
-
-```bash
+3. Instala dependencias:
+   ```zsh
 pip install -r requirements.txt
 ```
-
-### 4. Configurar variables de entorno
-
-Crea un archivo `.env` en la raíz del proyecto y agrega la configuración:
-
-```plaintext
-SECRET_KEY=tu-clave-secreta
+4. Configura tu archivo `.env`:
+   ```env
+SECRET_KEY=tu-clave
 DEBUG=True
 ALLOWED_HOSTS=localhost,127.0.0.1
-DB_NAME=mi_base_de_datos
-DB_USER=mi_usuario
-DB_PASSWORD=mi_contraseña
+DB_NAME=cammeras
+DB_USER=usuario
+DB_PASSWORD=contraseña
 DB_HOST=localhost
 DB_PORT=3306
 ```
-
-### 5. Aplicar migraciones de base de datos
-
-```bash
-python manage.py makemigrations\python manage.py migrate
+5. Aplica migraciones:
+   ```zsh
+python manage.py migrate
 ```
-
-### 6. Crear un superusuario
-
-```bash
+6. Crea un superusuario:
+   ```zsh
 python manage.py createsuperuser
 ```
-
-### 7. Ejecutar el servidor
-
-```bash
+7. Ejecuta el servidor:
+   ```zsh
 python manage.py runserver
 ```
 
-La API estará disponible en `http://127.0.0.1:8000/`
+---
+
+## Endpoints principales
+
+| Método | Endpoint           | Descripción                  |
+|--------|--------------------|------------------------------|
+| POST   | /auth/login/       | Login de usuario             |
+| POST   | /auth/register/    | Registro de usuario          |
+| POST   | /auth/logout/      | Logout de usuario            |
+| GET    | /auth/user/        | Perfil usuario autenticado   |
+| GET    | /auth/users-list/  | Listar usuarios (admin)      |
+| CRUD   | /auth/roles/       | Gestión de roles             |
+| CRUD   | /auth/permissions/ | Gestión de permisos          |
+| GET    | /docs/             | Documentación Swagger UI     |
+| GET    | /redoc/            | Documentación ReDoc          |
 
 ---
 
-## Uso
+## Documentación automática
 
-- Accede al panel de administración en `http://127.0.0.1:8000/admin`.
-- Consulta la API usando herramientas como Postman o cURL.
-- Frontend compatible con React, Next.js u otro framework moderno.
-
----
-
-## Estructura del proyecto
-
-```plaintext
-myproject/
-│-- manage.py
-│-- myproject/
-│   ├── settings.py
-│   ├── urls.py
-│   ├── wsgi.py
-│-- auth/
-│   ├── models/
-│   ├── services/
-│   ├── views/
-│   ├── urls.py
-│-- core/
-│-- requirements.txt
-│-- .env
-│-- README.md
-```
+- Accede a la documentación interactiva en `/docs/` (Swagger UI) o `/redoc/`.
+- El esquema OpenAPI está disponible en `/schema/`.
 
 ---
 
-## API Endpoints
+## Tecnologías
 
-| Método | Endpoint        | Descripción                |
-| ------ | --------------- | -------------------------- |
-| POST   | /auth/login/    | Iniciar sesión de usuario  |
-| POST   | /auth/register/ | Registrar un nuevo usuario |
-| POST   | /auth/logout/   | Cerrar sesión de usuario   |
-
----
-
-## Tecnologías utilizadas
-
-- **Django** - Framework principal
-- **Django REST Framework** - Construcción de APIs RESTful
-- **MySQL** - Base de datos
-- **SimpleJWT** - Autenticación basada en tokens JWT
-- **CORS Headers** - Permitir conexiones del frontend
-
----
-
-## Contribuciones
-
-Si deseas contribuir, por favor sigue los siguientes pasos:
-
-1. Haz un fork del repositorio.
-2. Crea una rama con tu nueva funcionalidad.
-3. Realiza un pull request explicando los cambios.
-
----
-
-## Licencia
-
-Este proyecto está licenciado bajo la MIT License - consulta el archivo [LICENSE](LICENSE) para más detalles.
+- Django 5+
+- Django REST Framework
+- drf-spectacular (OpenAPI/Swagger)
+- SimpleJWT
+- MySQL o PostgreSQL
 
 ---
 
 ## Autor
 
-Desarrollado por **[updavo](https://github.com/updavo)**
+Desarrollado por Anthony Villegas
