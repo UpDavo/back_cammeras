@@ -1,0 +1,7 @@
+from .http_method_serializer import HttpMethodSerializer
+from .permission_serializer import PermissionSerializer
+from .role_serializer import RoleSerializer
+from .user_serializer import UserSerializer
+from .update_user_serializer import UserUpdateSerializer
+from .simple_user_serializer import SimpleUserSerializer
+from .update_user_serializer2 import UserUpdateSerializer2
