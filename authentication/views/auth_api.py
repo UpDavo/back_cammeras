@@ -11,8 +11,10 @@ from authentication.models import CustomUser
 from rest_framework_simplejwt.views import TokenRefreshView
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
+from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiExample
 
 
+@extend_schema(tags=["Login"])
 class LoginView(APIView):
     permission_classes = [AllowAny]
 
@@ -50,6 +52,7 @@ class LoginView(APIView):
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 
+@extend_schema(tags=["Login"])
 class RegisterView(APIView):
     permission_classes = [AllowAny]
 
@@ -61,6 +64,7 @@ class RegisterView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@extend_schema(tags=["Autenticacion"])
 class LogoutView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -88,6 +92,7 @@ class LogoutView(APIView):
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 
+@extend_schema(tags=["Autenticacion"])
 @method_decorator(csrf_exempt, name="dispatch")
 class CustomTokenRefreshView(TokenRefreshView):
     permission_classes = [AllowAny]

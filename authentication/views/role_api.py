@@ -2,13 +2,16 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 from rest_framework.permissions import IsAuthenticated
 from authentication.models import Role
 from authentication.serializers import RoleSerializer
+from drf_spectacular.utils import extend_schema
 
+@extend_schema(tags=["Roles"])
 class RoleListAllView(ListAPIView):
     queryset = Role.objects.filter(deleted_at__isnull=True)
     serializer_class = RoleSerializer
     permission_classes = [IsAuthenticated]
     pagination_class = None
 
+@extend_schema(tags=["Roles"])
 class RoleListCreateView(ListCreateAPIView):
     """Listar roles con paginación y crear nuevos"""
     queryset = Role.objects.filter(deleted_at__isnull=True)
@@ -22,6 +25,7 @@ class RoleListCreateView(ListCreateAPIView):
         if permissions:
             role.permissions.set(permissions)
 
+@extend_schema(tags=["Roles"])
 class RoleDetailView(RetrieveUpdateDestroyAPIView):
     """Obtener, actualizar o eliminar un rol"""
     queryset = Role.objects.filter(deleted_at__isnull=True)

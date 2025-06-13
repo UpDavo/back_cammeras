@@ -2,8 +2,10 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 from rest_framework.permissions import IsAuthenticated
 from authentication.models import Permission
 from authentication.serializers import PermissionSerializer
+from drf_spectacular.utils import extend_schema
 
 
+@extend_schema(tags=["Roles"])
 class PermissionListCreateView(ListCreateAPIView):
     """Listar permisos con paginación y crear nuevos"""
     queryset = Permission.objects.filter(deleted_at__isnull=True)
@@ -18,6 +20,7 @@ class PermissionListCreateView(ListCreateAPIView):
             permission.methods.set(methods)
 
 
+@extend_schema(tags=["Roles"])
 class PermissionDetailView(RetrieveUpdateDestroyAPIView):
     """Obtener, actualizar o eliminar un permiso"""
     queryset = Permission.objects.filter(deleted_at__isnull=True)

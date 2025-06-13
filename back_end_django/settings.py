@@ -32,7 +32,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'authentication',
     'core',
-    'tada'
+    'drf_spectacular',
 ]
 
 
@@ -54,7 +54,21 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 10,
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'API Cammeras',
+    'DESCRIPTION': 'Documentación de la API de Cammeras',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    'TAGS': [
+        {'name': 'Login', 'description': 'Operaciones de inicio de sesión y registro'},
+        {'name': 'Usuario', 'description': 'Operaciones sobre usuarios'},
+        {'name': 'Roles', 'description': 'Operaciones sobre roles'},
+        {'name': 'Autenticacion', 'description': 'Operaciones de autenticación y tokens'},
+    ],
 }
 
 SIMPLE_JWT = {

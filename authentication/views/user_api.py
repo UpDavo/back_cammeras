@@ -6,8 +6,10 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.generics import ListAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from django.contrib.auth.hashers import make_password
+from drf_spectacular.utils import extend_schema
 
 
+@extend_schema(tags=["Usuario"])
 class UserDetailUpdateView(APIView):
     """Obtener y actualizar el usuario autenticado"""
     permission_classes = [IsAuthenticated]
@@ -27,6 +29,7 @@ class UserDetailUpdateView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@extend_schema(tags=["Usuario"])
 class UserListCreateView(ListCreateAPIView):
     """Lista paginada y creación de usuarios"""
     queryset = CustomUser.objects.all()
@@ -42,6 +45,7 @@ class UserListCreateView(ListCreateAPIView):
             serializer.save()
 
 
+@extend_schema(tags=["Usuario"])
 class UserRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     """Obtener, actualizar o eliminar un usuario"""
     queryset = CustomUser.objects.all()
@@ -64,6 +68,7 @@ class UserRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
 #     permission_classes = [IsAuthenticated]
 
 
+@extend_schema(tags=["Usuario"])
 class UserListAllView(ListAPIView):
     """Lista paginada de usuarios registrados"""
     queryset = CustomUser.objects.all()

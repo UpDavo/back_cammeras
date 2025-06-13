@@ -14,10 +14,6 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         users_data = [
             # ('Anthony Villegas', 'updavo@heimdal.ec'),
-            # ('Jose Luis Sanchez', 'jsanchez@heimdal.ec'),
-            # ('Erick Jaramillo', 'ejaramillo@heimdal.ec'),
-            ('Jocelyne Carrillo', 'jocelyne.carrillo@ab-inbev.com'),
-            ('Ulises Hernandez', 'edgar.hernandez.a@ab-inbev.com'),
         ]
 
         # Obtener el rol 'Customer Service'
