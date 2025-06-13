@@ -5,7 +5,7 @@ from authentication.models import CustomUser, Role
 
 
 class Command(BaseCommand):
-    help = 'Inserta masivamente usuarios en la base de datos con rol Customer Service'
+    help = 'Inserta masivamente usuarios en la base de datos con rol Admin'
 
     def generate_password(self, length=8):
         chars = string.ascii_letters + string.digits
@@ -13,15 +13,15 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         users_data = [
-            # ('Anthony Villegas', 'updavo@heimdal.ec'),
+            ('Anthony Villegas', 'updavo@heimdal.ec'),
         ]
 
-        # Obtener el rol 'Customer Service'
+        # Obtener el rol 'Admin'
         try:
-            cs_role = Role.objects.get(name='Customer Service')
+            cs_role = Role.objects.get(name='Admin')
         except Role.DoesNotExist:
             self.stdout.write(self.style.ERROR(
-                'El rol "Customer Service" no existe.'))
+                'El rol "Admin" no existe.'))
             return
 
         for name, email in users_data:
@@ -44,4 +44,4 @@ class Command(BaseCommand):
                 user.role = cs_role
                 user.save()
                 self.stdout.write(self.style.WARNING(
-                    f'El usuario ya existe y se asignó el rol Customer Service: {email}'))
+                    f'El usuario ya existe y se asignó el rol Admin: {email}'))

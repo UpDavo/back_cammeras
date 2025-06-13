@@ -8,9 +8,6 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         # Definir los permisos
         permissions_data = [
-            {"name": "Enviar Push", "path": "/push/send"},
-            {"name": "Crear Push", "path": "/push"},
-            {"name": "Ver Logs", "path": "/push/logs"},
             {"name": "Dashboard", "path": "/"},
             {"name": "Usuarios", "path": "/users"},
         ]
@@ -36,42 +33,12 @@ class Command(BaseCommand):
                 "name": "Admin",
                 "description": "Administrador",
                 "permissions": [
-                    "Enviar Push",
-                    "Crear Push",
-                    "Ver Logs",
                     "Dashboard",
                     "Usuarios"
                 ],
                 "is_admin": True
             },
-            {
-                "name": "Store",
-                "description": "Rol de Push",
-                "permissions": [
-                    "Enviar Push"
-                ],
-                "is_admin": False
-            },
-            {
-                "name": "Data",
-                "description": "Rol de Datos",
-                "permissions": [
-                    "Enviar Push",
-                    "Crear Push",
-                    "Ver Logs",
-                    "Dashboard"
-                ],
-                "is_admin": False
-            },
-            {
-                "name": "Customer Service",
-                "description": "Soporte al Cliente",
-                "permissions": [
-                    "Enviar Push",
-                    "Ver Logs"
-                ],
-                "is_admin": False
-            }
+
         ]
 
         # Crear los roles
